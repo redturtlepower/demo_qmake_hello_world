@@ -1,5 +1,5 @@
 mkdir build
 cd build
-qmake ./../helloworld.pro -spec=macx-clang CONFIG+=release
+~/Qt5.11.2/5.11.2/clang_64/bin/qmake ./../helloworld.pro -spec=macx-clang CONFIG+=release
 make
 
