@@ -7,7 +7,7 @@ node('buildmachine_macos_ios'){
     stage('Build'){
         withEnv([
         
-        }){
+        ]){
             sh 'bash build-mac.sh'
         }
     }
