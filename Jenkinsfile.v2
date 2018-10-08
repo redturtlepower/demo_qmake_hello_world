@@ -1,0 +1,29 @@
+#!/usr/bin/env groovy
+
+pipeline{
+    agent 'buildmachine_macos_ios'
+    stages{
+        stage('Checkout'){
+        	steps{
+                checkout scm
+            }
+        }
+        stage('Build'){
+        	steps{
+                sh 'bash build-mac.sh'
+            }
+        }
+        stage('Test'){
+        	steps{
+                sh 'bash test-mac.sh'
+            }
+        }
+        stage('Deploy'){
+            when{ tag "release-*" }
+        	steps{
+                echo 'Deploying only because this commit is tagged...'
+                sh 'bash package-mac.sh'
+            }
+        }
+    }
+}
