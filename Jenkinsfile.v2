@@ -1,7 +1,9 @@
 #!/usr/bin/env groovy
 
 pipeline{
-    agent 'buildmachine_macos_ios'
+    agent {
+        label 'mac_mini'
+    }
     stages{
         stage('Checkout'){
         	steps{
