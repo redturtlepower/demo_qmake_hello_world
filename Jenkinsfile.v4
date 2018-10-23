@@ -1,0 +1,53 @@
+#!/usr/bin/env groovy
+
+pipeline{
+    agent none
+    stages{
+        stage('Mac'){
+            agent {
+                label 'mac_mini'
+            }
+            stages{
+                stage('Checkout'){
+                	steps{
+                        checkout scm
+                    }
+                }
+                stage('Build'){
+                	steps{
+                        sh 'bash build-mac.sh'
+                    }
+                }
+                stage('Test'){
+                	steps{
+                        sh 'bash test-mac.sh'
+                    }
+                }
+                stage('Deploy'){
+                    when{ tag "release-*" }
+                	steps{
+                        echo 'Deploying only because this commit is tagged...'
+                        sh 'bash package-mac.sh'
+                    }
+                }
+            }
+        }
+        stage('Linux'){
+            agent {
+                label 'ubuntu_on_mac'
+            }
+            stages{
+                stage('Checkout'){
+                    steps{
+                        checkout scm
+                    }
+                }
+                stage('Build'){
+                	steps{
+                        sh 'bash build-ubuntu.sh'
+                    }
+                }
+            }
+        }
+    }
+}
