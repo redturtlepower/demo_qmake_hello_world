@@ -34,7 +34,7 @@ pipeline{
         }
         stage('Linux'){
             agent {
-                label 'ubuntu_on_mac'
+                label 'mac_ubuntu'
             }
             stages{
                 stage('Checkout'){
