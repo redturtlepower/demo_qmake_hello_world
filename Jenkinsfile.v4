@@ -33,18 +33,66 @@ pipeline{
             }
         }
         stage('Linux'){
-            agent {
-                label 'mac_ubuntu'
-            }
-            stages{
-                stage('Checkout'){
-                    steps{
-                        checkout scm
+            stage('Start Linux Vagrant'){
+                agent{
+                    label 'mac_mini'
+                }
+                steps{
+                    script{
+                        # Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
+                        try{
+                            sh '~/winlin'
+                            sh 'vagrant up ubuntu'
+                        } catch(err){
+                            echo 'Starting vagrant ubuntu maybe failed?'
+                        }
                     }
                 }
-                stage('Build'){
-                	steps{
-                        sh 'bash build-ubuntu.sh'
+            }
+            stage('Linux'){
+                agent {
+                    label 'mac_ubuntu'
+                }
+                stages{
+                    stage('Checkout'){
+                        steps{
+                            checkout scm
+                        }
+                    }
+                    stage('Build'){
+                        steps{
+                            sh 'bash build-ubuntu.sh'
+                        }
+                    }
+                }
+            }
+        }
+        stage('Windows'){
+            stage('Start Windows Vagrant (Wine on Ubuntu)'){
+                agent{
+                    label 'mac_mini'
+                }
+                steps{
+                    script{
+                        # Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
+                        try{
+                            sh '~/winlin'
+                            sh 'vagrant up wine'
+                        } catch(err){
+                            echo 'Starting vagrant wine maybe failed?'
+                        }
+                    }
+                }
+            }
+            stage('Windows'){
+                agent {
+                    label 'mac_wine'
+                }
+                stages{
+                    stage('Checkout'){
+                        steps{
+                            checkout scm
+                        }
                     }
                 }
             }
