@@ -74,7 +74,7 @@ pipeline{
                 }
                 steps{
                     script{
-                        # Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
+                        // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
                         try{
                             sh '~/winlin'
                             sh 'vagrant up wine'
