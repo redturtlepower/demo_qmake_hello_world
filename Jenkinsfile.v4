@@ -67,6 +67,19 @@ pipeline{
                         }
                     }
                 }
+                stage('Stop Linux Vagrant'){
+                    steps{
+                        script{
+                            // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
+                            try{
+                                sh '~/winlin'
+                                sh 'vagrant halt ubuntu'
+                            } catch(err){
+                                echo 'Stoping vagrant ubuntu maybe failed?'
+                            }
+                        }
+                    }
+                }
             }
         }
     }
