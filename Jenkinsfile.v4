@@ -32,12 +32,12 @@ pipeline{
                 }
             }
         }
-        stage('Linux'){
-            steps{
+        stage('Linux Wrapper'){
+            agent{
+                label 'mac_mini'
+            }
+            stages{
                 stage('Start Linux Vagrant'){
-                    agent{
-                        label 'mac_mini'
-                    }
                     steps{
                         script{
                             // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
@@ -63,38 +63,6 @@ pipeline{
                         stage('Build'){
                             steps{
                                 sh 'bash build-ubuntu.sh'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        stage('Windows'){
-            steps{
-                stage('Start Windows Vagrant (Wine on Ubuntu)'){
-                    agent{
-                        label 'mac_mini'
-                    }
-                    steps{
-                        script{
-                            // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
-                            try{
-                                sh '~/winlin'
-                                sh 'vagrant up wine'
-                            } catch(err){
-                                echo 'Starting vagrant wine maybe failed?'
-                            }
-                        }
-                    }
-                }
-                stage('Windows'){
-                    agent {
-                        label 'mac_wine'
-                    }
-                    stages{
-                        stage('Checkout'){
-                            steps{
-                                checkout scm
                             }
                         }
                     }
