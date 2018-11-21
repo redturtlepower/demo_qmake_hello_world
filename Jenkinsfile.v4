@@ -42,8 +42,9 @@ pipeline{
                         script{
                             // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
                             try{
-                                sh '~/winlin'
-                                sh 'vagrant up ubuntu'
+                                dir('~/winlin'){
+                                    sh 'vagrant up ubuntu'
+                                }
                             } catch(err){
                                 echo 'Starting vagrant ubuntu maybe failed?'
                             }
