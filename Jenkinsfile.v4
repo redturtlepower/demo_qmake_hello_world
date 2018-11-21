@@ -42,7 +42,7 @@ pipeline{
                         script{
                             // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
                             try{
-                                dir('~/winlin'){
+                                dir('/Users/jenkins/winlin'){
                                     sh 'vagrant up ubuntu'
                                 }
                             } catch(err){
