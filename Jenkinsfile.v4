@@ -32,53 +32,19 @@ pipeline{
                 }
             }
         }
-        stage('Linux Wrapper'){
-            agent{
-                label 'mac_mini'
+        stage('Linux'){
+            agent {
+                label 'mac_ubuntu'
             }
             stages{
-                stage('Start Linux Vagrant'){
+                stage('Checkout'){
                     steps{
-                        script{
-                            // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
-                            try{
-                                //dir('/Users/jenkins/winlin'){
-                                sh 'cd /Users/jenkins/winlin; vagrant up ubuntu'
-                                //}
-                            } catch(err){
-                                echo 'Starting vagrant ubuntu maybe failed?'
-                            }
-                        }
+                        checkout scm
                     }
                 }
-                stage('Linux'){
-                    agent {
-                        label 'mac_ubuntu'
-                    }
-                    stages{
-                        stage('Checkout'){
-                            steps{
-                                checkout scm
-                            }
-                        }
-                        stage('Build'){
-                            steps{
-                                sh 'bash build-ubuntu.sh'
-                            }
-                        }
-                    }
-                }
-                stage('Stop Linux Vagrant'){
+                stage('Build'){
                     steps{
-                        script{
-                            // Do not fail the build process, because usually the vagrant start returns a failure yet vagrant is up and running!
-                            try{
-                                sh '~/winlin'
-                                sh 'vagrant halt ubuntu'
-                            } catch(err){
-                                echo 'Stoping vagrant ubuntu maybe failed?'
-                            }
-                        }
+                        sh 'bash build-ubuntu.sh'
                     }
                 }
             }
