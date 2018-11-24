@@ -8,6 +8,11 @@ pipeline{
                 label 'mac_mini'
             }
             stages{
+                stage('Clean'){
+                    steps{
+                        cleanWs()
+                    }
+                }
                 stage('Checkout'){
                 	steps{
                         checkout scm
@@ -37,6 +42,11 @@ pipeline{
                 label 'mac_ubuntu'
             }
             stages{
+                stage('Clean'){
+                    steps{
+                        cleanWs()
+                    }
+                }
                 stage('Checkout'){
                     steps{
                         checkout scm
