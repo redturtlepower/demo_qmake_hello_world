@@ -31,6 +31,7 @@ sed -i "s/__PRO_FILE_NAME__/`echo ${PROJECT_NAME}`/g" ~/.wine/drive_c/buildenv/1
 # into folder '~/.wine/drive_c/buildenv/app'!
 rm -rf ~/.wine/drive_c/buildenv/app/*
 SRC_DIR=/home/jenkins/workspace/${PROJECT_NAME}
+rm -rf ${SRC_DIR}/.git/
 cp -R ${SRC_DIR}/. ~/.wine/drive_c/buildenv/app/
 
 # Run the bat file in the context of windows via wine:
