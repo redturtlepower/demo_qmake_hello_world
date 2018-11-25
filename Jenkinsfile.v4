@@ -59,5 +59,27 @@ pipeline{
                 }
             }
         }
+        stage('Wine'){
+            agent {
+                label 'mac_wine'
+            }
+            stages{
+                stage('Clean'){
+                    steps{
+                        cleanWs()
+                    }
+                }
+                stage('Checkout'){
+                    steps{
+                        checkout scm
+                    }
+                }
+                stage('Build'){
+                    steps{
+                        sh 'bash build-wine-msvc.sh'
+                    }
+                }
+            }
+        }
     }
 }
