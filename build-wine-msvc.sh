@@ -35,4 +35,4 @@ rm -rf ${SRC_DIR}/.git/
 cp -R ${SRC_DIR}/. ~/.wine/drive_c/buildenv/app/
 
 # Run the bat file in the context of windows via wine:
-wine ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+wineconsole ~/.wine/drive_c/buildenv/1-build-src.generated.bat
