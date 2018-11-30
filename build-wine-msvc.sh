@@ -11,7 +11,7 @@ COMMIT=`echo $(git log -1 | sed -n 1p | cut -c7-47)` # 'a39c68c4741639d4189b7ed4
 echo 'commit:' $COMMIT
 
 # Extract the date from the 3rd row:
-COMMIT_DATE=$(git log -1 | sed -n 3p | cut -c12-28) # 'Jun 3 00:35:34'
+COMMIT_DATE=$(git log -1 | sed -n 3p | cut -c12-27) # 'Jun 3 00:35:34'
 # Remove first space with -, remove next space with _, replace all remaining : with -
 COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/' | sed 's/ /_/' | sed 's/:/-/g' `  
 # Result: 
