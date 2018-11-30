@@ -15,7 +15,7 @@ COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/'` # Replace space with -
 #mkdir build
 #cd build
 BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}_${BUILD_DATE}
-echo 'Building in dir $BUILD_DIR'
+echo 'Building in dir' $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 # in wine, linux root folder is mapped to Z:
