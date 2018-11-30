@@ -44,4 +44,7 @@ rm -rf ${SRC_DIR}/.git/
 cp -R ${SRC_DIR}/. ~/.wine/drive_c/buildenv/app/
 
 # Run the bat file in the context of windows via wine:
-wineconsole ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+# Can't use this on wine directly because this starts a cmd shell,
+# and there is no display on docker wine!
+# wineconsole ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+wineconsole wscript ~/.wine/drive_c/buildenv/start-invisible-bat.vbs
