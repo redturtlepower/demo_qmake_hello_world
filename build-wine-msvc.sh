@@ -1,7 +1,7 @@
 PROJECT_NAME=helloworld
 
 DATE=`date '+%Y-%m-%d_%H-%M-%S'`
-GIT_LOG=`git --git-dir ./../ log -1`
+GIT_LOG=`git log -1`
 # commit a39c68c4741639d4189b7ed4axd87b234b210797 (HEAD -> master, origin/master, origin/HEAD)
 # Author: John Doe <a@b.com>
 # Date: Sun Jun 3 00:35:34 2018 +0200
