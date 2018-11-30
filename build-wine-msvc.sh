@@ -1,12 +1,11 @@
 PROJECT_NAME=helloworld
 
 DATE=`date '+%Y-%m-%d_%H-%M-%S'`
-GIT_LOG=`git log -1`
+echo `git log -1`
 # commit a39c68c4741639d4189b7ed4axd87b234b210797 (HEAD -> master, origin/master, origin/HEAD)
 # Author: John Doe <a@b.com>
 # Date: Sun Jun 3 00:35:34 2018 +0200
-echo 'git log -1:' $GIT_LOG
-COMMIT=$($git log - 1 | cut -c7-47) # 'a39c68c4741639d4189b7ed4axd87b234b210797'
+COMMIT=$(git log -1 | cut -c7-47) # 'a39c68c4741639d4189b7ed4axd87b234b210797'
 LINE_DATE=$(git log -1 | sed -n 3p)
 echo 'line date:' $LINE_DATE
 COMMIT_DATE=`echo $LINE_DATE | cut -c10-26` # 'Jun 3 00:35:34 2018 +0200'
