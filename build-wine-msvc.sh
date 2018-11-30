@@ -27,15 +27,17 @@ mkdir -p $BUILD_DIR
 
 # in wine, linux root folder is mapped to Z:
 BUILD_DIR=Z:${BUILD_DIR}
+echo "Generating build script..."
 # Create build-bat-file by replacing placeholders from template:
-sed "s/__BUILD_DIR__/`echo ${BUILD_DIR}`/" ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+sed 's/__BUILD_DIR__/`echo ${BUILD_DIR}`/' ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 # Use pro-file name of this project (helloworld):
-sed -i "s/__PRO_FILE_NAME__/`echo ${PROJECT_NAME}`/g" ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+sed -i 's/__PRO_FILE_NAME__/`echo ${PROJECT_NAME}`/g' ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 
 
 # Copy all the files  
 # of the directory that contains the helloworld.pro-file
 # into folder '~/.wine/drive_c/buildenv/app'!
+echo "Copying src from workspace to app-folder..."
 rm -rf ~/.wine/drive_c/buildenv/app/*
 SRC_DIR=/home/jenkins/workspace/${PROJECT_NAME}
 rm -rf ${SRC_DIR}/.git/
