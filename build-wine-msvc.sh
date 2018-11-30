@@ -6,24 +6,28 @@ GIT_LOG=`git log -1`
 # Author: John Doe <a@b.com>
 # Date: Sun Jun 3 00:35:34 2018 +0200
 echo 'git log -1:' $GIT_LOG
-COMMIT=`echo $GIT_LOG | cut -c7-47` # 'a39c68c4741639d4189b7ed4axd87b234b210797'
-LINE_DATE=`echo $GIT_LOG | sed -n 2p`
+COMMIT=$($GIT_LOG - 1 | cut -c7-47) # 'a39c68c4741639d4189b7ed4axd87b234b210797'
+LINE_DATE=$(git log -1 | sed -n 3p)
 echo 'line date:' $LINE_DATE
-COMMIT_DATE=`echo $LINE_DATE | cut -c10-25` # 'Jun 3 00:35:34 2018 +0200'
-COMMIT_DATE=`echo $COMMIT_DATE | sed 's/:/ /'` # Replace : with space
-COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/'` # Replace space with - 
+COMMIT_DATE=`echo $LINE_DATE | cut -c10-26` # 'Jun 3 00:35:34 2018 +0200'
+COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/'` # Remove first space with -
+COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /_/'` # Remove next first space with _
+COMMIT_DATE=`echo $COMMIT_DATE | sed 's/:/-/g'` # Replace : globally with -
+# Result: 
+# Jun-3_00-35-34
 echo 'commit date:' $COMMIT_DATE
 
 #mkdir build
 #cd build
-BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}_${BUILD_DATE}
+#BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}_${BUILD_DATE}
+BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}
 echo 'Building in dir' $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 # in wine, linux root folder is mapped to Z:
 BUILD_DIR=Z:${BUILD_DIR}
 # Create build-bat-file by replacing placeholders from template:
-sed "s/__BUILD_DIR__/`echo $BUILD_DIR`/" ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+sed "s/__BUILD_DIR__/`echo ${BUILD_DIR}`/" ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 # Use pro-file name of this project (helloworld):
 sed -i "s/__PRO_FILE_NAME__/`echo ${PROJECT_NAME}`/g" ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 
