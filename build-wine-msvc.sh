@@ -6,8 +6,11 @@ echo `git log -1`
 # Author: John Doe <a@b.com>
 # Date: Sun Jun 3 00:35:34 2018 +0200
 COMMIT=$(git log -1 | cut -c7-47) # 'a39c68c4741639d4189b7ed4axd87b234b210797'
+echo 'commit:' $COMMIT
+
 LINE_DATE=$(git log -1 | sed -n 3p)
 echo 'line date:' $LINE_DATE
+
 COMMIT_DATE=`echo $LINE_DATE | cut -c10-26` # 'Jun 3 00:35:34 2018 +0200'
 COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/'` # Remove first space with -
 COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /_/'` # Remove next first space with _
