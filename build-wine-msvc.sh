@@ -7,7 +7,7 @@ GIT_LOG=`git log -1`
 # Date: Sun Jun 3 00:35:34 2018 +0200
 COMMIT=`echo $GIT_LOG | cut -c7-47` # 'a39c68c4741639d4189b7ed4axd87b234b210797'
 LINE_DATE=`echo $GIT_LOG | sed -n 2p`
-echo 'line date: %LINE_DATE'
+echo 'line date:' $LINE_DATE
 COMMIT_DATE=`echo $LINE_DATE | cut -c10-25` # 'Jun 3 00:35:34 2018 +0200'
 COMMIT_DATE=`echo $COMMIT_DATE | sed 's/:/ /'` # Replace : with space
 COMMIT_DATE=`echo $COMMIT_DATE | sed 's/ /-/'` # Replace space with -
@@ -19,7 +19,7 @@ echo 'Building in dir' $BUILD_DIR
 mkdir -p $BUILD_DIR
 
 # in wine, linux root folder is mapped to Z:
-BUILD_DIR='Z:${BUILD_DIR}'
+BUILD_DIR=Z:${BUILD_DIR}
 # Create build-bat-file by replacing placeholders from template:
 sed "s/__BUILD_DIR__/`echo $BUILD_DIR`/" ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 # Use pro-file name of this project (helloworld):
