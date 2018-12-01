@@ -21,7 +21,7 @@ echo 'commit date:' $COMMIT_DATE
 #mkdir build
 #cd build
 #BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}_${BUILD_DATE}
-BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}
+BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT_DATE}_${COMMIT}
 echo 'Building in dir' $BUILD_DIR
 mkdir -p $BUILD_DIR
 
@@ -29,9 +29,9 @@ mkdir -p $BUILD_DIR
 BUILD_DIR=Z:${BUILD_DIR}
 echo "Generating build script..."
 # Create build-bat-file by replacing placeholders from template:
-sed 's/__BUILD_DIR__/'"${BUILD_DIR}"'/' ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+sed "s/__BUILD_DIR__/${BUILD_DIR}/g" ~/.wine/drive_c/buildenv/1-build-src.bat.template > ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 # Use pro-file name of this project (helloworld):
-sed -i 's/__PRO_FILE_NAME__/'"${PROJECT_NAME}"'/g' ~/.wine/drive_c/buildenv/1-build-src.generated.bat
+sed -i "s/__PRO_FILE_NAME__/${PROJECT_NAME}/g" ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 
 
 # Copy all the files  
