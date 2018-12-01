@@ -21,7 +21,7 @@ echo 'commit date:' $COMMIT_DATE
 #mkdir build
 #cd build
 #BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT}_${COMMIT_DATE}_${BUILD_DATE}
-BUILD_DIR=/var/artifacts/rusche/${PROJECT_NAME}/${COMMIT_DATE}_${COMMIT}
+BUILD_DIR=\/var\/artifacts\/rusche\/${PROJECT_NAME}\/${COMMIT_DATE}_${COMMIT}
 echo 'Building in dir' $BUILD_DIR
 mkdir -p $BUILD_DIR
 
