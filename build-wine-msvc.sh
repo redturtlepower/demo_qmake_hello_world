@@ -37,7 +37,7 @@ sed -i "s/__PRO_FILE_NAME__/${PROJECT_NAME}/g" ~/.wine/drive_c/buildenv/1-build-
 sed -i "s/__PRO_FILE_NAME__/${PROJECT_NAME}/g" ~/.wine/drive_c/buildenv/1-build-src.generated.sh
 
 
-# Copy all the files  
+# Copy all the files 
 # of the directory that contains the helloworld.pro-file
 # into folder '~/.wine/drive_c/buildenv/app'!
 echo "Copying src from workspace to app-folder..."
@@ -51,4 +51,8 @@ cp -R ${SRC_DIR}/. ~/.wine/drive_c/buildenv/app/
 # and there is no display on docker wine!
 # wineconsole cmd.exe  /C ~/.wine/drive_c/buildenv/1-build-src.generated.bat
 # wineconsole wscript ~/.wine/drive_c/buildenv/start-invisible-bat.vbs
-/bin/bash ~/.wine/drive_c/buildenv/1-build-src.generated.sh
+# /bin/bash ~/.wine/drive_c/buildenv/1-build-src.generated.sh
+cd BUILD_DIR
+wine ~/.wine/drive_c/buildenv/deps/qt-511/bin/qmake.exe ${SRC_DIR}/${PROJECT_NAME}.pro -spec linux-g++ CONFIG+=x86_64 CONFIG+=release
+# ~/Qt5.11.2/5.11.2/gcc_64/bin/qmake ./../helloworld.pro -spec linux-g++ CONFIG+=x86_64 CONFIG+=release
+wine make
