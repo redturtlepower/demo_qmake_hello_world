@@ -61,7 +61,7 @@ pipeline{
         }
         stage('Android'){
             agent {
-                label 'mac_ubuntu'
+                label 'mac_android'
             }
             stages{
                 stage('Clean'){
