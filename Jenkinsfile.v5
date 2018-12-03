@@ -57,10 +57,6 @@ pipeline{
                         sh 'bash build-ios.sh'
                     }
                 }
-                stage('Test'){
-                }
-                stage('Deploy'){
-                }
             }
         }
         stage('Linux'){
