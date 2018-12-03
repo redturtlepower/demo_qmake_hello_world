@@ -4,4 +4,5 @@ cd build-ios
 make
 
 xcodebuild -list -project helloworld.xcodeproj
-xcodebuild -scheme ${scheme} build
+scheme=helloworld
+xcodebuild -scheme ${scheme} build 
