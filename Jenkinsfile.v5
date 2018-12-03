@@ -37,6 +37,32 @@ pipeline{
                 }
             }
         }
+        stage('ios'){
+            agent {
+                label 'mac_mini'
+            }
+            stages{
+                stage('Clean'){
+                    steps{
+                        cleanWs()
+                    }
+                }
+                stage('Checkout'){
+                    steps{
+                        checkout scm
+                    }
+                }
+                stage('Build'){
+                    steps{
+                        sh 'bash build-ios.sh'
+                    }
+                }
+                stage('Test'){
+                }
+                stage('Deploy'){
+                }
+            }
+        }
         stage('Linux'){
             agent {
                 label 'mac_ubuntu'
