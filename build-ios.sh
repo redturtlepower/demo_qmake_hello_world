@@ -5,4 +5,4 @@ make
 
 xcodebuild -list -project helloworld.xcodeproj
 scheme=helloworld
-xcodebuild -scheme ${scheme} build 
+xcodebuild -scheme ${scheme} build -allowProvisioningUpdates
