@@ -3,6 +3,7 @@
 pipeline{
     agent none
     stages{
+        try{
         stage('Mac'){
             agent {
                 label 'mac_mini'
@@ -37,6 +38,10 @@ pipeline{
                 }
             }
         }
+        }catch(e){
+            echo "Failed Mac: " e.toString()
+        }
+        try{
         stage('ios'){
             agent {
                 label 'mac_mini'
@@ -58,6 +63,9 @@ pipeline{
                     }
                 }
             }
+        }
+        }catch(e){
+            echo "Failed ios: " e.toString()
         }
         stage('Linux'){
             agent {
