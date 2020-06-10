@@ -5,9 +5,7 @@ pipeline{
     stages{ 
         stage('Windows'){
             agent {
-                docker { 
-                    label 'windows-qt'
-                }
+                label 'windows-qt'
             }
             stages{
                 stage('Clean'){
