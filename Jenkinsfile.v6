@@ -5,7 +5,10 @@ pipeline{
     stages{ 
         stage('Docker-Wine'){
             agent {
-                docker { image 'wine-msvc-qt-sshagent' }
+                docker { 
+                    image 'wine-msvc-qt-sshagent'
+                    label 'mac_wine'
+                }
             }
             stages{
                 stage('Clean'){
