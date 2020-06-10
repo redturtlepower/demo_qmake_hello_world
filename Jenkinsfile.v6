@@ -5,7 +5,7 @@ pipeline{
     stages{ 
         stage('Windows'){
             agent {
-                label 'windows-qt'
+                docker 'wine-msvc-qt-sshagent'
             }
             stages{
                 stage('Clean'){
