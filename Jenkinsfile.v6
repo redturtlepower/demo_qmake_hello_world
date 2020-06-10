@@ -3,10 +3,10 @@
 pipeline{
     agent none
     stages{ 
-        stage('Docker-Wine'){
+        stage('Windows'){
             agent {
                 docker { 
-                    image 'wine-msvc-qt-sshagent'
+                    label 'windows-qt'
                 }
             }
             stages{
