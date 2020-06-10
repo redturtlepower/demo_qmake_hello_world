@@ -102,28 +102,6 @@ pipeline{
                     }
                 }
             }
-        }        
-        stage('Docker-Wine'){
-            agent {
-                docker { image 'wine-msvc-qt-sshagent' }
-            }
-            stages{
-                stage('Clean'){
-                    steps{
-                        cleanWs()
-                    }
-                }
-                stage('Checkout'){
-                    steps{
-                        checkout scm
-                    }
-                }
-                stage('Build'){
-                    steps{
-                        sh 'bash build-wine-msvc.sh'
-                    }
-                }
-            }
         }
         stage('Wine'){
             agent {
